@@ -4,10 +4,11 @@
 			"MNU_FASE4":"FASE 4",
 			"MNU_GRPB":"Grupo B",
 			"Grupo A": "Grupo A",
-			"MNU_JCGR_CAP_SEM4": "Estudiante JCGR",
-			"MNU_TALLER_VPI":"Estudiante VPI",
-			"Estudiante MAPL Form": "Estudiante MAPL Form",
-			"MNU_ACA_TALLER_2":"Estudiante AFCL"
+			"MNU_ESTUDIANTEARC": "Grupo1 - Andres Rueda",
+			"MNU_ESTUDIANTEJCGR":"Grupo1 - Juan Carlos Guzmán",
+			"MNU_ESTUDIANTEVPI": "Grupo1 - Veronica Pineda",
+			"MNU_ESTUDIANTEAFCL":"Grupo1 - Alberto Carrera",
+			"MNU_ESTUDIANTEMAPL":"Grupo1 - Milton Paucar",
 		}
     }
 }
