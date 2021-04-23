@@ -17,6 +17,7 @@ VALUES (@w_id_rol, 1, @w_rol_descripcion, getdate(), 3, 'V', getdate(), 900, NUL
 
 select * from ad_rol where ro_rol = @w_id_rol
 
+go
 
 
 --PROCEDIENTO PARA AÑADIR MENU
@@ -25,10 +26,10 @@ IF OBJECT_ID ('sp_menus_semillero') IS NOT NULL
 GO
 
 create procedure sp_menus_semillero
-   @i_id_url 					varchar(500),
-   @i_id_parent				   	int,
-   @i_name	   	    			varchar(100),
-   @i_description				varchar(100),
+   @i_url 						varchar(500) 	= null,
+   @i_id_parent				   	int				= null,
+   @i_name	   	    			varchar(100)	= null,
+   @i_description				varchar(100)	= null,
    @i_operacion					char(1)
 
 as
@@ -39,12 +40,12 @@ declare
 
 if @i_operacion = 'I'
 begin
-	
-end
 	--Verifica si existe el menu con la url ingresada
-	if exists(select 1 from cew_menu where me_url = @i_id_url)
+	if exists(select 1 from cew_menu where me_url = @i_url )
 	begin
-		delete from cew_menu where me_url = @i_id_url
+		set @w_id_menu = (select me_id from cew_menu where me_url=@i_url )
+        delete from cew_menu_role where mro_id_menu = @w_id_menu
+        delete from cew_menu where me_url=@i_url
 	end
 	
 	--Suma 1 al ultimo menu insertado
@@ -59,27 +60,24 @@ end
 	(me_id, 		me_id_parent, me_name, me_visible, me_url, me_order,
 	me_id_cobis_product, me_option, me_description, me_version, me_container)
 	values 
-	(@w_id_menu, 	@i_id_parent, @i_name, 			1, @i_id_url, 		1,
+	(@w_id_menu, 	@i_id_parent, @i_name, 			1, @i_url , 		1,
 	@w_id_producto, 			 0, @i_description, 	  NULL, 	   'CWC')
 	
 	--Busca el id del rol CAP SEMILLERO4
 	select @w_id_rol =  ro_rol from ad_rol where ro_descripcion = 'CAP SEMILLERO4'
 	
-	--Si esta registrado en la tabla de asignacion de rol, se elimina
-	if exists(select 1 from cew_menu_role where mro_id_menu = @w_id_menu and mro_id_role=@w_id_rol)
-	begin
-		delete from cew_menu where me_url = @i_id_url
-	end
-	
 	--Se relaciona el menu con el rol
 	insert into cew_menu_role (mro_id_menu, mro_id_role)
 	values (@w_id_menu, @w_id_rol)
+end
 go
+
+
 
 -- MENU PRINCIPAL
 declare @w_id_menu 		int,
 		@w_id_producto	int,
-		@w_id_url		varchar(300),
+		@w_url			varchar(300),
 		@w_id_rol		int,
 		@w_me_name		varchar(100)
 
@@ -87,7 +85,11 @@ select @w_me_name = 'MNU_FASE4'
 
 if exists(select 1 from cew_menu where me_name = @w_me_name)
 begin
-	delete from cew_menu where me_name = @w_me_name
+	select @w_id_menu = me_id from cew_menu where me_name = @w_me_name
+	delete crol from cew_menu_role crol, cew_menu cmenu where crol.mro_id_menu = cmenu.me_id and cmenu.me_id_parent = @w_id_menu
+	delete from cew_menu where me_id_parent = @w_id_menu
+	delete from cew_menu_role where mro_id_menu = @w_id_menu
+	delete from cew_menu where me_name = @w_me_name 
 end
 
 select @w_id_menu = max(me_id) from cew_menu
@@ -105,11 +107,6 @@ values
 
 select @w_id_rol =  ro_rol from ad_rol where ro_descripcion = 'CAP SEMILLERO4'
 
-if exists(select 1 from cew_menu_role where mro_id_menu = @w_id_menu and mro_id_role=@w_id_rol)
-begin
-	delete from cew_menu where me_url = @w_id_url
-end
-
 insert into cew_menu_role (mro_id_menu, mro_id_role)
 values (@w_id_menu, @w_id_rol)
 
@@ -117,45 +114,101 @@ select * from cew_menu where me_name = @w_me_name
 
 select * from cew_menu_role where mro_id_menu = @w_id_menu
 
+go
+
+
 
 
 ---------------------------------Añadir el resto de menus ------------------------------------------
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
-	@i_url 							= 'views/FRONT/ENDDD/T_FRONTRPGDCKMI_937/1.0.0/VC_ESTUDIANVV_112937_TASK.html', 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTJXBJZVQW_794/1.0.0/VC_ESTUDIANMD_132794_TASK.html', 
 	@i_id_parent 					= @w_id_menu, 
-	@i_name 						= 'MNU_ESTUDIANTEVPI', 
-	@i_description 					= 'Menu EstudianteVPI del grupo 1', 
+	@i_name 						= 'MNU_ESTUDIANTEDMP', 
+	@i_description 					= 'Menu EstudianteDmp del grupo 3', 
 	@i_operacion					='I'
 go
 
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
-	@i_url 							= 'views/FRONT/ENDDD/T_FRONTUVXMNZNU_590/1.0.0/VC_ESTUDIANFA_171590_TASK.html', 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTYFEACMSI_996/1.0.0/VC_ESTUDIANDY_850996_TASK.html', 
 	@i_id_parent 					= @w_id_menu, 
-	@i_name 						= 'MNU_ESTUDIANTEAFCL', 
-	@i_description 					= 'Menu EstudianteAFCL del grupo 1', 
+	@i_name 						= 'MNU_ESTUDIANTEDSY', 
+	@i_description 					= 'Menu EstudianteDsy del grupo 3', 
 	@i_operacion					='I'
 go
 
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
-	@i_url 							= 'views/FRONT/ENDDD/T_FRONTWTSVCGKR_940/1.0.0/VC_ESTUDIANTE_758940_TASK.html',
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTCZCRNJKD_109/1.0.0/VC_ESTUDIANSS_585109_TASK.html', 
 	@i_id_parent 					= @w_id_menu, 
-	@i_name 						= 'MNU_ESTUDIANTEMAPL', 
-	@i_description 					= 'Menu EstudianteMAPL del grupo 1', 
+	@i_name 						= 'MNU_ESTUDIANTEASH', 
+	@i_description 					= 'Menu EstudianteAsh del grupo 3', 
 	@i_operacion					='I'
 go
 
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
-	@i_url 							= 'views/FRONT/ENDDD/T_FRONTKFXUJXAZ_402/1.0.0/VC_ESTUDIANEA_712402_TASK.html', 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTGLOZBOPH_997/1.0.0/VC_ESTUDIANTT_344997_TASK.html', 
 	@i_id_parent 					= @w_id_menu, 
-	@i_name 						= 'MNU_ESTUDIANTEARC', 
-	@i_description 					= 'Menu EstudianteARC del grupo 1', 
+	@i_name 						= 'MNU_ESTUDIANTEJCO', 
+	@i_description 					= 'Menu EstudianteJco del grupo 3', 
 	@i_operacion					='I'
 go
+
+--Grupo 2
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTHDPRWEIY_200/1.0.0/VC_ESTUDIANTE_738200_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEBDF', 
+	@i_description 					= 'Menu EstudianteBDF del grupo 2', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTYYLHVRWX_877/1.0.0/VC_ESTUDIANZZ_362877_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEDGZ', 
+	@i_description 					= 'Menu EstudianteDGZ del grupo 2', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTFSTIYXEX_288/1.0.0/VC_ESTUDIANEJ_444288_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEJES', 
+	@i_description 					= 'Menu EstudianteJES del grupo 2', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTNUITXMNA_708/1.0.0/VC_ESTUDIANME_123708_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTELAM', 
+	@i_description 					= 'Menu EstudianteLAM del grupo 2', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTWTSVCGKR_940/1.0.0/VC_ESTUDIANTE_758940_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEOFV', 
+	@i_description 					= 'Menu EstudianteOFV del grupo 2', 
+	@i_operacion					='I'
+go
+
+-- grupo1
