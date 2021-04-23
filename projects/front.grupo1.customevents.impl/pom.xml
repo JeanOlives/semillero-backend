@@ -147,6 +147,16 @@
 		</pluginManagement>
 	</build>
 	<dependencies>
+	<dependency>
+			<artifactId>front.domains</artifactId>
+	<groupId>com.cobiscorp.cobis</groupId>
+	<version>1.0.0</version>
+	</dependency>
+	<dependency>
+		<artifactId>front.domains</artifactId>
+		<groupId>com.cobiscorp.cobis</groupId>
+		<version>1.0.0</version>
+	</dependency>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.scr.annotations</artifactId>
@@ -171,11 +181,6 @@
 			<groupId>com.cobiscorp.cobis</groupId>
 			<artifactId>cobis-plugin-activator</artifactId>
 			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-		<artifactId>front.domains</artifactId>
-	<groupId>com.cobiscorp.cobis</groupId>
-	<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.cobiscorp.cobis.cts</groupId>

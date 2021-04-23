@@ -54,7 +54,7 @@ public class VA_VABUTTONMRSTWDT_943602 implements IExecuteCommand {
 		}
 		try {
 			if (logger.isDebugEnabled()) {
-				logger.logDebug("Start executeCommand in VA_VABUTTONIGJPMOU_866938");
+				logger.logDebug("Start executeCommand in VA_VABUTTONMRSTWDT_943602");
 				logger.logDebug("Estudiante AFCL");
 				logger.logDebug("Nombre: "+nombre);
 				logger.logDebug("Apellido: "+apellido);

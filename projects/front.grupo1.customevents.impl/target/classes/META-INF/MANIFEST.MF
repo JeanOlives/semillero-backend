@@ -1,26 +1,26 @@
 Manifest-Version: 1.0
+Built-By: Usuario
+Build-Jdk: 14.0.2
+Created-By: Maven Integration for Eclipse
 TFS-BuildDate: 2020-11-20 11:37:21
-Bundle-SymbolicName: com.cobiscorp.cobis-front.grupo1.customevents.imp
- l-1.0.0
-Built-By: User
+Bundle-SymbolicName: com.cobiscorp.cobis-front.grupo1.customevents.impl-
+ 1.0.0
 Bundle-ManifestVersion: 2
 Bundle-Vendor: COBISCORP
-TFS-RepositoryName: https://tfs.cobiscorp.com/tfs/DefaultCollection/CO
- B/_git/DSG branch:refs/heads/dsg_Liberaion7.2Master23
-Import-Package: com.cobiscorp.cobis.commons.domains.log,com.cobiscorp.
- cobis.commons.log,com.cobiscorp.cobis.front.model,com.cobiscorp.desig
- ner.api,com.cobiscorp.designer.api.customization,com.cobiscorp.design
- er.api.customization.arguments,com.cobiscorp.designer.api.managers,co
- m.cobiscorp.designer.common
+TFS-RepositoryName: https://tfs.cobiscorp.com/tfs/DefaultCollection/COB/
+ _git/DSG branch:refs/heads/dsg_Liberaion7.2Master23
+Import-Package: com.cobiscorp.cobis.commons.domains.log,com.cobiscorp.co
+ bis.commons.log,com.cobiscorp.cobis.front.model,com.cobiscorp.designer.
+ api,com.cobiscorp.designer.api.customization,com.cobiscorp.designer.api
+ .customization.arguments,com.cobiscorp.designer.api.managers,com.cobisc
+ orp.designer.common
 Service-Component: OSGI-INF/serviceComponents.xml
 Tool: Bundlor 1.0.0.RELEASE
 TFS-ChangeSet: dc7eaa11d303eeb2394615f0a68fe7a550934630
-Export-Package: com.cobiscorp.cobis.front.customevents.impl.view.execu
- tecommand;version="1.0.0";uses:="com.cobiscorp.designer.api,com.cobis
- corp.designer.api.customization,com.cobiscorp.designer.api.customizat
- ion.arguments"
+Export-Package: com.cobiscorp.cobis.front.customevents.impl.view.execute
+ command;version="1.0.0";uses:="com.cobiscorp.designer.api,com.cobiscorp
+ .designer.api.customization,com.cobiscorp.designer.api.customization.ar
+ guments"
 Bundle-Name: com.cobiscorp.cobis-front.grupo1.customevents.impl
 Bundle-Version: 1.0.0
-Build-Jdk: 1.8.0_271
-Created-By: Maven Integration for Eclipse
 
