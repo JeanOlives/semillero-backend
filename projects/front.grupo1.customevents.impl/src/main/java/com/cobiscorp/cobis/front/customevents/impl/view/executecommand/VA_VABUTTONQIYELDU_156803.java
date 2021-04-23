@@ -1,5 +1,5 @@
 /*
- * Archivo: VA_VABUTTONIGJPMOU_866938.java
+ * Archivo: VA_VABUTTONQIYELDU_156803.java
  *
  * Esta aplicacion es parte de los paquetes bancarios propiedad de COBISCORP.
  * Su uso no autorizado queda expresamente prohibido asi como cualquier
@@ -19,6 +19,8 @@ import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import com.cobiscorp.cobis.commons.domains.log.ILogger;
 import com.cobiscorp.cobis.commons.log.LogFactory;
+import com.cobiscorp.cobis.front.model.EstudianteTODOS;
+import com.cobiscorp.designer.api.DataEntity;
 import com.cobiscorp.designer.api.DynamicRequest;
 import com.cobiscorp.designer.api.customization.IExecuteCommand;
 import com.cobiscorp.designer.api.customization.arguments.IExecuteCommandEventArgs;
@@ -26,23 +28,39 @@ import com.cobiscorp.designer.api.managers.DesignerManagerException;
 
 @Component
 @Service({ IExecuteCommand.class })
-@Properties(value={
-		@Property(name = "view.id", value = "VW_ESTUDIANVE_938"),
+@Properties(value = { @Property(name = "view.id", value = "VW_ESTUDIANLP_803"),
 		@Property(name = "view.version", value = "1.0.0"),
-		@Property(name = "view.controlId", value = "VA_VABUTTONIGJPMOU_866938")})
+		@Property(name = "view.controlId", value = "VA_VABUTTONQIYELDU_156803") })
 
-public class VA_VABUTTONIGJPMOU_866938 implements IExecuteCommand {
+public class VA_VABUTTONQIYELDU_156803 implements IExecuteCommand {
 	/**
 	 * Instancia de Logger
 	 */
-	private static final ILogger logger = LogFactory.getLogger(VA_VABUTTONIGJPMOU_866938.class);
+	private static final ILogger logger = LogFactory.getLogger(VA_VABUTTONQIYELDU_156803.class);
 
 	@Override
 	public void executeCommand(DynamicRequest arg0, IExecuteCommandEventArgs arg1) {
-		// TODO Auto-generated method stub
+		DataEntity dataEntityPersona = arg0.getEntity(EstudianteTODOS.ENTITY_NAME);
+		String nombre = dataEntityPersona.get(EstudianteTODOS.NOMBRE);
+		String apellido = dataEntityPersona.get(EstudianteTODOS.APELLIDO);
+		String sexo = dataEntityPersona.get(EstudianteTODOS.SEXO);
+		Integer edad = dataEntityPersona.get(EstudianteTODOS.EDAD);
+		if(sexo.equalsIgnoreCase("m")){
+			sexo="Masculino";
+		}
+		
+		if(sexo.equalsIgnoreCase("f")){
+			sexo="Femenino";
+		}
+		
+		logger.logDebug("Grupo A");
+		logger.logDebug("Nombre: " + nombre);
+		logger.logDebug("Apellido: " + apellido);
+		logger.logDebug("Edad: " + edad);
+		logger.logDebug("Sexo: " + sexo);
 		try {
 			if (logger.isDebugEnabled()) {
-				logger.logDebug("Start executeCommand in VA_VABUTTONIGJPMOU_866938");
+				logger.logDebug("Start executeCommand in VA_VABUTTONQIYELDU_156803");
 			}
 		} catch (Exception ex) {
 			DesignerManagerException.handleException(arg1.getMessageManager(), ex, logger);
@@ -50,4 +68,3 @@ public class VA_VABUTTONIGJPMOU_866938 implements IExecuteCommand {
 	}
 
 }
-

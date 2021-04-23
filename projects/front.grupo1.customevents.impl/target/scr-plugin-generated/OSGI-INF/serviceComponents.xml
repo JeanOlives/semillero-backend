@@ -9,4 +9,14 @@
         <property name="view.controlId" type="String" value="VA_VABUTTONIGJPMOU_866938"/>
         <property name="service.pid" value="com.cobiscorp.cobis.front.customevents.impl.view.executecommand.VA_VABUTTONIGJPMOU_866938"/>
     </scr:component>
+    <scr:component enabled="true" name="com.cobiscorp.cobis.front.customevents.impl.view.executecommand.VA_VABUTTONQIYELDU_156803">
+        <implementation class="com.cobiscorp.cobis.front.customevents.impl.view.executecommand.VA_VABUTTONQIYELDU_156803"/>
+        <service servicefactory="false">
+            <provide interface="com.cobiscorp.designer.api.customization.IExecuteCommand"/>
+        </service>
+        <property name="view.id" type="String" value="VW_ESTUDIANLP_803"/>
+        <property name="view.version" type="String" value="1.0.0"/>
+        <property name="view.controlId" type="String" value="VA_VABUTTONQIYELDU_156803"/>
+        <property name="service.pid" value="com.cobiscorp.cobis.front.customevents.impl.view.executecommand.VA_VABUTTONQIYELDU_156803"/>
+    </scr:component>
 </components>
