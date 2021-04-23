@@ -117,8 +117,9 @@ select * from cew_menu_role where mro_id_menu = @w_id_menu
 go
 
 
+
+
 ---------------------------------Añadir el resto de menus ------------------------------------------
---grupo1
 
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
@@ -130,6 +131,7 @@ exec sp_menus_semillero
 	@i_operacion					='I'
 go
 
+
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
@@ -139,6 +141,7 @@ exec sp_menus_semillero
 	@i_description 					= 'Menu EstudianteVPI del grupo 1', 
 	@i_operacion					='I'
 go
+
 
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
@@ -150,6 +153,7 @@ exec sp_menus_semillero
 	@i_operacion					='I'
 go
 
+
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
@@ -159,6 +163,7 @@ exec sp_menus_semillero
 	@i_description 					= 'Menu EstudianteMAPL del grupo 1', 
 	@i_operacion					='I'
 go
+
 
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
