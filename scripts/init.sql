@@ -117,10 +117,19 @@ select * from cew_menu_role where mro_id_menu = @w_id_menu
 go
 
 
-
-
 ---------------------------------Añadir el resto de menus ------------------------------------------
 --grupo1
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTMQVQEABI_484/1.0.0/VC_ESTUDIANCG_496484_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEJCGR', 
+	@i_description 					= 'Menu EstudianteJCGR del grupo 1', 
+	@i_operacion					='I'
+go
+
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
@@ -160,4 +169,3 @@ exec sp_menus_semillero
 	@i_description 					= 'Menu EstudianteARC del grupo 1', 
 	@i_operacion					='I'
 go
-
