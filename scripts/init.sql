@@ -210,3 +210,54 @@ exec sp_menus_semillero
 	@i_description 					= 'Menu EstudianteOFV del grupo 2', 
 	@i_operacion					='I'
 go
+
+-- grupo1
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTMQVQEABI_484/1.0.0/VC_ESTUDIANCG_496484_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEJCGR', 
+	@i_description 					= 'Menu EstudianteJCGR del grupo 1', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTRPGDCKMI_937/1.0.0/VC_ESTUDIANVV_112937_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEVPI', 
+	@i_description 					= 'Menu EstudianteVPI del grupo 1', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTUVXMNZNU_590/1.0.0/VC_ESTUDIANFA_171590_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEAFCL', 
+	@i_description 					= 'Menu EstudianteAFCL del grupo 1', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTWTSVCGKR_940/1.0.0/VC_ESTUDIANTE_758940_TASK.html',
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEMAPL', 
+	@i_description 					= 'Menu EstudianteMAPL del grupo 1', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTKFXUJXAZ_402/1.0.0/VC_ESTUDIANEA_712402_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEARC', 
+	@i_description 					= 'Menu EstudianteARC del grupo 1', 
+	@i_operacion					='I'
+go
