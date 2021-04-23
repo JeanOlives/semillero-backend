@@ -72,6 +72,8 @@ begin
 end
 go
 
+
+
 -- MENU PRINCIPAL
 declare @w_id_menu 		int,
 		@w_id_producto	int,
@@ -83,9 +85,11 @@ select @w_me_name = 'MNU_FASE4'
 
 if exists(select 1 from cew_menu where me_name = @w_me_name)
 begin
-	set @w_id_menu = (select me_id from cew_menu where me_name = @w_me_name )
-    delete from cew_menu_role where mro_id_menu = @w_id_menu
-    delete from cew_menu where me_name = @w_me_name 
+	select @w_id_menu = me_id from cew_menu where me_name = @w_me_name
+	delete crol from cew_menu_role crol, cew_menu cmenu where crol.mro_id_menu = cmenu.me_id and cmenu.me_id_parent = @w_id_menu
+	delete from cew_menu where me_id_parent = @w_id_menu
+	delete from cew_menu_role where mro_id_menu = @w_id_menu
+	delete from cew_menu where me_name = @w_me_name 
 end
 
 select @w_id_menu = max(me_id) from cew_menu
@@ -112,13 +116,49 @@ select * from cew_menu_role where mro_id_menu = @w_id_menu
 
 go
 
+
+
+
 ---------------------------------Añadir el resto de menus ------------------------------------------
 declare @w_id_menu int
-select @w_id_menu = me_id from cew_menu where @w_me_name = 'Menu FASE 4'
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
-	@i_id_url 						= 'views/FRONT/ENDDD/T_FRONTJXBJZVQW_794/1.0.0/VC_ESTUDIANMD_132794_TASK.html', 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTJXBJZVQW_794/1.0.0/VC_ESTUDIANMD_132794_TASK.html', 
 	@i_id_parent 					= @w_id_menu, 
 	@i_name 						= 'MNU_ESTUDIANTEDMP', 
 	@i_description 					= 'Menu EstudianteDmp del grupo 3', 
 	@i_operacion					='I'
 go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTYFEACMSI_996/1.0.0/VC_ESTUDIANDY_850996_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEDSY', 
+	@i_description 					= 'Menu EstudianteDsy del grupo 3', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTCZCRNJKD_109/1.0.0/VC_ESTUDIANSS_585109_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEASH', 
+	@i_description 					= 'Menu EstudianteAsh del grupo 3', 
+	@i_operacion					='I'
+go
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTGLOZBOPH_997/1.0.0/VC_ESTUDIANTT_344997_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTEJCO', 
+	@i_description 					= 'Menu EstudianteJco del grupo 3', 
+	@i_operacion					='I'
+go
+
+
+
