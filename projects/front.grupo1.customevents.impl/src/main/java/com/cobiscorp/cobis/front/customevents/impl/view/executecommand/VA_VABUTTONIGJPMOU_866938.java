@@ -38,11 +38,20 @@ public class VA_VABUTTONIGJPMOU_866938 implements IExecuteCommand {
 	private static final ILogger logger = LogFactory.getLogger(VA_VABUTTONIGJPMOU_866938.class);
 
 	@Override
-	public void executeCommand(DynamicRequest arg0, IExecuteCommandEventArgs arg1) {
-		// TODO Auto-generated method stub
+	public void executeCommand(DynamicRequest entities, IExecuteCommandEventArgs arg1) {
+		DataEntity dataEntityEstudiante = entities.getEntity(EstudianteTODOS.ENTITY_NAME);
+
+		String nombre = dataEntityEstudiante.get(EstudianteTODOS.NOMBRE);
+		String apellido = dataEntityEstudiante.get(EstudianteTODOS.APELLIDO);
+		Integer edad = dataEntityEstudiante.get(EstudianteTODOS.EDAD);
+		String sexo = dataEntityEstudiante.get(EstudianteTODOS.SEXO);
 		try {
 			if (logger.isDebugEnabled()) {
-				logger.logDebug("Start executeCommand in VA_VABUTTONIGJPMOU_866938");
+				logger.logDebug("Nombre: " + nombre);
+				logger.logDebug("Apellido: " + apellido);
+				logger.logDebug("Edad: " + edad);
+				logger.logDebug("Sexo: " + sexo);
+
 			}
 		} catch (Exception ex) {
 			DesignerManagerException.handleException(arg1.getMessageManager(), ex, logger);
