@@ -1218,10 +1218,16 @@
 	<plan id="plan_domain" reloadable="true">
 		<plugin name="front.domains-1.0.0.jar" path="../../SEM/plugins/front.domains-1.0.0.jar" />
 	</plan>
+	<plan id="plan_grupo2" reloadable="true">
+		<plugin name="front.grupob.customevents.impl-1.0.0.jar" path="../../SEM/plugins/front.grupob.customevents.impl-1.0.0.jar"/>
+		<plugin name="front.grupob.customevents.view-1.0.0.jar" path="../../SEM/plugins/front.grupob.customevents.view-1.0.0.jar"/>
+		<plugin name="front.grupob.services-1.0.0.jar" path="../../SEM/plugins/front.grupob.services-1.0.0.jar"/>
+	  </plan>
 	<plan id="plan_grupo3" reloadable="true">
 		<plugin name="front.grupoc.customevents.impl-1.0.0.jar" path="../../SEM/plugins/front.grupoc.customevents.impl-1.0.0.jar" />
 		<plugin name="front.grupoc.customevents.view-1.0.0.jar" path="../../SEM/plugins/front.grupoc.customevents.view-1.0.0.jar" />
 		<plugin name="front.grupoc.services-1.0.0.jar" path="../../SEM/plugins/front.grupoc.services-1.0.0.jar" />
 	</plan>
+	
 </own>
 </ccm-plan-config>
