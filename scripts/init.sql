@@ -184,14 +184,16 @@ go
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
-<<<<<<< HEAD
 	@i_url 							= 'views/FRONT/ENDDD/T_FRONTFSTIYXEX_288/1.0.0/VC_ESTUDIANEJ_444288_TASK.html', 
 	@i_id_parent 					= @w_id_menu, 
 	@i_name 						= 'MNU_ESTUDIANTEJES', 
 	@i_description 					= 'Menu EstudianteJES del grupo 2', 
 	@i_operacion					='I'
 go
-=======
+
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
 	@i_url 							= 'views/FRONT/ENDDD/T_FRONTNUITXMNA_708/1.0.0/VC_ESTUDIANME_123708_TASK.html', 
 	@i_id_parent 					= @w_id_menu, 
 	@i_name 						= 'MNU_ESTUDIANTELAM', 
@@ -199,4 +201,4 @@ go
 	@i_operacion					='I'
 go
 
->>>>>>> 6b5ee40f0a734f307be5b5143330edc8cb89ddd7
+
