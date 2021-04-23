@@ -17,6 +17,7 @@ VALUES (@w_id_rol, 1, @w_rol_descripcion, getdate(), 3, 'V', getdate(), 900, NUL
 
 select * from ad_rol where ro_rol = @w_id_rol
 
+go
 
 
 --PROCEDIENTO PARA AÑADIR MENU
@@ -25,10 +26,10 @@ IF OBJECT_ID ('sp_menus_semillero') IS NOT NULL
 GO
 
 create procedure sp_menus_semillero
-   @i_id_url 					varchar(500),
-   @i_id_parent				   	int,
-   @i_name	   	    			varchar(100),
-   @i_description				varchar(100),
+   @i_url 						varchar(500) 	= null,
+   @i_id_parent				   	int				= null,
+   @i_name	   	    			varchar(100)	= null,
+   @i_description				varchar(100)	= null,
    @i_operacion					char(1)
 
 as
@@ -39,12 +40,12 @@ declare
 
 if @i_operacion = 'I'
 begin
-	
-end
 	--Verifica si existe el menu con la url ingresada
-	if exists(select 1 from cew_menu where me_url = @i_id_url)
+	if exists(select 1 from cew_menu where me_url = @i_url )
 	begin
-		delete from cew_menu where me_url = @i_id_url
+		set @w_id_menu = (select me_id from cew_menu where me_url=@i_url )
+        delete from cew_menu_role where mro_id_menu = @w_id_menu
+        delete from cew_menu where me_url=@i_url
 	end
 	
 	--Suma 1 al ultimo menu insertado
@@ -59,27 +60,24 @@ end
 	(me_id, 		me_id_parent, me_name, me_visible, me_url, me_order,
 	me_id_cobis_product, me_option, me_description, me_version, me_container)
 	values 
-	(@w_id_menu, 	@i_id_parent, @i_name, 			1, @i_id_url, 		1,
+	(@w_id_menu, 	@i_id_parent, @i_name, 			1, @i_url , 		1,
 	@w_id_producto, 			 0, @i_description, 	  NULL, 	   'CWC')
 	
 	--Busca el id del rol CAP SEMILLERO4
 	select @w_id_rol =  ro_rol from ad_rol where ro_descripcion = 'CAP SEMILLERO4'
 	
-	--Si esta registrado en la tabla de asignacion de rol, se elimina
-	if exists(select 1 from cew_menu_role where mro_id_menu = @w_id_menu and mro_id_role=@w_id_rol)
-	begin
-		delete from cew_menu where me_url = @i_id_url
-	end
-	
 	--Se relaciona el menu con el rol
 	insert into cew_menu_role (mro_id_menu, mro_id_role)
 	values (@w_id_menu, @w_id_rol)
+end
 go
+
+
 
 -- MENU PRINCIPAL
 declare @w_id_menu 		int,
 		@w_id_producto	int,
-		@w_id_url		varchar(300),
+		@w_url			varchar(300),
 		@w_id_rol		int,
 		@w_me_name		varchar(100)
 
@@ -87,7 +85,11 @@ select @w_me_name = 'MNU_FASE4'
 
 if exists(select 1 from cew_menu where me_name = @w_me_name)
 begin
-	delete from cew_menu where me_name = @w_me_name
+	select @w_id_menu = me_id from cew_menu where me_name = @w_me_name
+	delete crol from cew_menu_role crol, cew_menu cmenu where crol.mro_id_menu = cmenu.me_id and cmenu.me_id_parent = @w_id_menu
+	delete from cew_menu where me_id_parent = @w_id_menu
+	delete from cew_menu_role where mro_id_menu = @w_id_menu
+	delete from cew_menu where me_name = @w_me_name 
 end
 
 select @w_id_menu = max(me_id) from cew_menu
@@ -105,11 +107,6 @@ values
 
 select @w_id_rol =  ro_rol from ad_rol where ro_descripcion = 'CAP SEMILLERO4'
 
-if exists(select 1 from cew_menu_role where mro_id_menu = @w_id_menu and mro_id_role=@w_id_rol)
-begin
-	delete from cew_menu where me_url = @w_id_url
-end
-
 insert into cew_menu_role (mro_id_menu, mro_id_role)
 values (@w_id_menu, @w_id_rol)
 
@@ -117,9 +114,13 @@ select * from cew_menu where me_name = @w_me_name
 
 select * from cew_menu_role where mro_id_menu = @w_id_menu
 
+go
+
+
 
 
 ---------------------------------Añadir el resto de menus ------------------------------------------
+--grupo1
 declare @w_id_menu int
 select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
 exec sp_menus_semillero 
@@ -159,3 +160,4 @@ exec sp_menus_semillero
 	@i_description 					= 'Menu EstudianteARC del grupo 1', 
 	@i_operacion					='I'
 go
+
