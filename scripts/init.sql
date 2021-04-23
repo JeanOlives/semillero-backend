@@ -181,3 +181,13 @@ exec sp_menus_semillero
 	@i_operacion					='I'
 go
 
+declare @w_id_menu int
+select @w_id_menu = me_id from cew_menu where me_name = 'MNU_FASE4'
+exec sp_menus_semillero 
+	@i_url 							= 'views/FRONT/ENDDD/T_FRONTNUITXMNA_708/1.0.0/VC_ESTUDIANME_123708_TASK.html', 
+	@i_id_parent 					= @w_id_menu, 
+	@i_name 						= 'MNU_ESTUDIANTELAM', 
+	@i_description 					= 'Menu EstudianteLAM del grupo 2', 
+	@i_operacion					='I'
+go
+
