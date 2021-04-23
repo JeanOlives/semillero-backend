@@ -210,3 +210,5 @@ exec sp_menus_semillero
 	@i_description 					= 'Menu EstudianteOFV del grupo 2', 
 	@i_operacion					='I'
 go
+
+-- grupo1
